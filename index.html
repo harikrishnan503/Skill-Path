@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>SkillPath</title>
 
   <style>
@@ -51,7 +52,7 @@
 
     .hero {
       text-align: center;
-      padding: 70px 10px 45px;
+      padding: 65px 10px 45px;
     }
 
     .hero h1 {
@@ -106,10 +107,6 @@
       cursor: pointer;
     }
 
-    .search-box button:hover {
-      opacity: 0.9;
-    }
-
     .section-title {
       margin: 25px 0 18px;
       font-size: 22px;
@@ -119,7 +116,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 15px;
-      padding-bottom: 50px;
+      padding-bottom: 35px;
     }
 
     .skill-card {
@@ -165,7 +162,39 @@
 
     .roadmap-subtitle {
       color: #94a3b8;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+    }
+
+    /* Progress */
+
+    .progress-box {
+      background: #0f172a;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #334155;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #progressFill {
+      width: 0%;
+      height: 100%;
+      background: #38bdf8;
+      border-radius: 10px;
+      transition: width 0.3s ease;
     }
 
     .topic {
@@ -183,6 +212,7 @@
     .topic-number {
       width: 35px;
       height: 35px;
+      min-width: 35px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -214,6 +244,22 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .start-btn.done {
+      background: #22c55e;
+      color: white;
+    }
+
+    .reset-btn {
+      border: none;
+      background: #334155;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
     }
 
     footer {
@@ -224,6 +270,7 @@
     }
 
     @media (max-width: 600px) {
+
       .hero h1 {
         font-size: 36px;
       }
@@ -236,6 +283,14 @@
       .search-box button {
         padding: 13px;
       }
+
+      .topic {
+        align-items: flex-start;
+      }
+
+      .start-btn {
+        padding: 8px 10px;
+      }
     }
   </style>
 </head>
@@ -244,20 +299,34 @@
 
   <div class="container">
 
+    <!-- Navigation -->
+
     <nav>
-      <div class="logo">Skill<span>Path</span></div>
-      <div class="badge">🚀 Learn Smarter</div>
+      <div class="logo">
+        Skill<span>Path</span>
+      </div>
+
+      <div class="badge">
+        🚀 Learn Smarter
+      </div>
     </nav>
 
+
+    <!-- Hero -->
+
     <section class="hero">
-      <h1>Build Your <span>Learning Path</span></h1>
+
+      <h1>
+        Build Your <span>Learning Path</span>
+      </h1>
 
       <p>
-        Choose a skill and turn your goal into a simple step-by-step
-        learning roadmap.
+        Choose a skill and turn your goal into a simple
+        step-by-step learning roadmap.
       </p>
 
       <div class="search-box">
+
         <input
           id="skillInput"
           type="text"
@@ -267,50 +336,136 @@
         <button onclick="generateRoadmap()">
           Create Path
         </button>
+
       </div>
+
     </section>
 
-    <h2 class="section-title">Popular Skills</h2>
+
+    <!-- Popular Skills -->
+
+    <h2 class="section-title">
+      Popular Skills
+    </h2>
 
     <div class="skills">
 
-      <div class="skill-card" onclick="selectSkill('Python')">
+      <div
+        class="skill-card"
+        onclick="selectSkill('Python')"
+      >
         <div class="skill-icon">🐍</div>
+
         <h3>Python</h3>
-        <p>Learn programming from beginner level.</p>
+
+        <p>
+          Learn programming from beginner level.
+        </p>
       </div>
 
-      <div class="skill-card" onclick="selectSkill('Web Development')">
+
+      <div
+        class="skill-card"
+        onclick="selectSkill('Web Development')"
+      >
         <div class="skill-icon">🌐</div>
+
         <h3>Web Development</h3>
-        <p>Build websites using modern technologies.</p>
+
+        <p>
+          Build websites using modern technologies.
+        </p>
       </div>
 
-      <div class="skill-card" onclick="selectSkill('JavaScript')">
+
+      <div
+        class="skill-card"
+        onclick="selectSkill('JavaScript')"
+      >
         <div class="skill-icon">⚡</div>
+
         <h3>JavaScript</h3>
-        <p>Learn the language of the web.</p>
+
+        <p>
+          Learn the language of the web.
+        </p>
       </div>
 
-      <div class="skill-card" onclick="selectSkill('UI/UX Design')">
+
+      <div
+        class="skill-card"
+        onclick="selectSkill('UI/UX Design')"
+      >
         <div class="skill-icon">🎨</div>
+
         <h3>UI/UX Design</h3>
-        <p>Create useful and beautiful interfaces.</p>
+
+        <p>
+          Create useful and beautiful interfaces.
+        </p>
       </div>
 
     </div>
 
-    <div id="roadmap" class="roadmap">
-      <h2 id="roadmapTitle">Your Roadmap</h2>
+
+    <!-- Roadmap -->
+
+    <div
+      id="roadmap"
+      class="roadmap"
+    >
+
+      <h2 id="roadmapTitle">
+        Your Roadmap
+      </h2>
 
       <p class="roadmap-subtitle">
         Follow these steps and build your skill step by step.
       </p>
 
+
+      <!-- Progress -->
+
+      <div class="progress-box">
+
+        <div class="progress-info">
+
+          <span>
+            Learning Progress
+          </span>
+
+          <span id="progressText">
+            0%
+          </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div id="progressFill"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Topics -->
+
       <div id="topics"></div>
+
+
+      <button
+        class="reset-btn"
+        onclick="resetProgress()"
+      >
+        🔄 Reset Progress
+      </button>
+
     </div>
 
   </div>
+
 
   <footer>
     © 2026 SkillPath • Learn. Build. Grow. 🚀
@@ -318,6 +473,10 @@
 
 
   <script>
+
+    /* =========================
+       ROADMAP DATA
+    ========================= */
 
     const roadmaps = {
 
@@ -330,6 +489,7 @@
         ["6", "Mini Project", "Build your first Python project"]
       ],
 
+
       "javascript": [
         ["1", "JavaScript Basics", "Variables, data types and operators"],
         ["2", "Conditions & Loops", "Control the flow of your program"],
@@ -339,6 +499,7 @@
         ["6", "Mini Project", "Build an interactive web app"]
       ],
 
+
       "web development": [
         ["1", "HTML", "Build the structure of websites"],
         ["2", "CSS", "Style and design your pages"],
@@ -347,6 +508,7 @@
         ["5", "Git & GitHub", "Manage your code"],
         ["6", "Final Project", "Build and publish a website"]
       ],
+
 
       "ui/ux design": [
         ["1", "Design Basics", "Learn colour, typography and spacing"],
@@ -360,75 +522,136 @@
     };
 
 
+    /* =========================
+       SELECT SKILL
+    ========================= */
+
     function selectSkill(skill) {
+
       document.getElementById("skillInput").value = skill;
+
       generateRoadmap();
+
     }
 
 
+    /* =========================
+       GENERATE ROADMAP
+    ========================= */
+
     function generateRoadmap() {
 
-      const input = document
-        .getElementById("skillInput")
-        .value
-        .trim();
+      const input =
+        document
+          .getElementById("skillInput")
+          .value
+          .trim();
+
 
       if (!input) {
+
         alert("Please enter a skill first!");
+
         return;
+
       }
+
 
       const key = input.toLowerCase();
 
+
       let roadmap = roadmaps[key];
+
+
+      /* Custom roadmap for unknown skills */
 
       if (!roadmap) {
 
         roadmap = [
-          ["1", "Learn the Basics", "Understand the fundamentals"],
-          ["2", "Core Concepts", "Learn the important concepts"],
-          ["3", "Practice", "Solve small exercises"],
-          ["4", "Build a Mini Project", "Apply what you learned"],
-          ["5", "Intermediate Level", "Explore deeper topics"],
-          ["6", "Final Project", "Build something useful"]
+
+          ["1", "Learn the Basics",
+           "Understand the fundamentals"],
+
+          ["2", "Core Concepts",
+           "Learn the important concepts"],
+
+          ["3", "Practice",
+           "Solve small exercises"],
+
+          ["4", "Mini Project",
+           "Apply what you learned"],
+
+          ["5", "Intermediate Level",
+           "Explore deeper topics"],
+
+          ["6", "Final Project",
+           "Build something useful"]
+
         ];
 
       }
 
+
       document.getElementById("roadmapTitle").innerText =
         input + " Learning Path";
 
-      const topics = document.getElementById("topics");
+
+      const topics =
+        document.getElementById("topics");
+
 
       topics.innerHTML = "";
 
-      roadmap.forEach(topic => {
+
+      roadmap.forEach((topic, index) => {
 
         topics.innerHTML += `
+
           <div class="topic">
 
             <div class="topic-number">
               ${topic[0]}
             </div>
 
+
             <div class="topic-info">
-              <h3>${topic[1]}</h3>
-              <p>${topic[2]}</p>
+
+              <h3>
+                ${topic[1]}
+              </h3>
+
+              <p>
+                ${topic[2]}
+              </p>
+
             </div>
+
 
             <button
               class="start-btn"
+              data-index="${index}"
               onclick="completeTopic(this)"
             >
               Start
             </button>
 
           </div>
+
         `;
 
       });
 
-      document.getElementById("roadmap").style.display = "block";
+
+      document.getElementById("roadmap").style.display =
+        "block";
+
+
+      /*
+        Load saved progress
+      */
+
+      loadProgress();
+
 
       document.getElementById("roadmap").scrollIntoView({
         behavior: "smooth"
@@ -437,12 +660,220 @@
     }
 
 
+    /* =========================
+       COMPLETE TOPIC
+    ========================= */
+
     function completeTopic(button) {
 
       button.innerText = "✓ Done";
-      button.style.background = "#22c55e";
-      button.style.color = "white";
+
+      button.classList.add("done");
+
       button.disabled = true;
+
+
+      saveProgress();
+
+      updateProgress();
+
+    }
+
+
+    /* =========================
+       UPDATE PROGRESS
+    ========================= */
+
+    function updateProgress() {
+
+      const buttons =
+        document.querySelectorAll(".start-btn");
+
+
+      let completed = 0;
+
+
+      buttons.forEach(button => {
+
+        if (button.disabled) {
+
+          completed++;
+
+        }
+
+      });
+
+
+      const total = buttons.length;
+
+
+      let progress = 0;
+
+
+      if (total > 0) {
+
+        progress =
+          Math.round(
+            (completed / total) * 100
+          );
+
+      }
+
+
+      document.getElementById("progressText").innerText =
+        progress + "%";
+
+
+      document.getElementById("progressFill").style.width =
+        progress + "%";
+
+    }
+
+
+    /* =========================
+       SAVE PROGRESS
+    ========================= */
+
+    function saveProgress() {
+
+      const buttons =
+        document.querySelectorAll(".start-btn");
+
+
+      const completed = [];
+
+
+      buttons.forEach((button, index) => {
+
+        if (button.disabled) {
+
+          completed.push(index);
+
+        }
+
+      });
+
+
+      const skill =
+        document
+          .getElementById("skillInput")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      if (skill) {
+
+        localStorage.setItem(
+          "skillpath_" + skill,
+          JSON.stringify(completed)
+        );
+
+      }
+
+    }
+
+
+    /* =========================
+       LOAD PROGRESS
+    ========================= */
+
+    function loadProgress() {
+
+      const skill =
+        document
+          .getElementById("skillInput")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const saved =
+        localStorage.getItem(
+          "skillpath_" + skill
+        );
+
+
+      if (!saved) {
+
+        updateProgress();
+
+        return;
+
+      }
+
+
+      const completed =
+        JSON.parse(saved);
+
+
+      const buttons =
+        document.querySelectorAll(".start-btn");
+
+
+      completed.forEach(index => {
+
+        if (buttons[index]) {
+
+          buttons[index].innerText =
+            "✓ Done";
+
+          buttons[index].classList.add("done");
+
+          buttons[index].disabled = true;
+
+        }
+
+      });
+
+
+      updateProgress();
+
+    }
+
+
+    /* =========================
+       RESET PROGRESS
+    ========================= */
+
+    function resetProgress() {
+
+      const skill =
+        document
+          .getElementById("skillInput")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      if (!skill) {
+
+        return;
+
+      }
+
+
+      localStorage.removeItem(
+        "skillpath_" + skill
+      );
+
+
+      const buttons =
+        document.querySelectorAll(".start-btn");
+
+
+      buttons.forEach(button => {
+
+        button.innerText = "Start";
+
+        button.classList.remove("done");
+
+        button.disabled = false;
+
+      });
+
+
+      updateProgress();
 
     }
 
